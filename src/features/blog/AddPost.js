@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from './redux/actions';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+
 
 export class AddPost extends Component {
   static propTypes = {
@@ -16,15 +17,20 @@ export class AddPost extends Component {
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const {title, body, image} = this.state;
-    const post = {
-      title, body, image
-    };
-    this.props.actions.enviarPost(post).then(() => this.props.history.push("/"));
+ 
 
-  }
+  handleSubmit = e => {
+    e.preventDefault();
+    const { title, body, image } = this.state;
+    const post = {
+      title,
+      body,
+      image,
+    };
+    this.props.actions.enviarPost(post).then(() => this.props.history.push('/'));
+  };
+
+  
 
   render() {
     console.log(this.state);
@@ -45,7 +51,9 @@ export class AddPost extends Component {
               className="form-control add-post-body"
               name="body"
               placeholder="Corpo"
+              value={this.state.body}
               onChange={this.handleChange}
+              rows="10"
             />
             <input
               className="form-control add-post-title"

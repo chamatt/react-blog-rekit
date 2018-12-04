@@ -1,8 +1,69 @@
 @import '../../styles/mixins';
 
-.wordwrap { 
-   white-space: pre-wrap;      /* CSS3 */   
-   white-space: -moz-pre-wrap; /* Firefox */   
-   white-space: -o-pre-wrap;   /* Opera 7 */    
-   word-wrap: break-word;      /* IE */
+.blog-post-container {
+  width: 100%;
+  box-shadow: 0px 0px 10px 0.01px rgba(50, 50, 50, 0.1);
+  padding: 2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.blog-post-container .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.blog-post-title {
+  padding-left: 16px;
+  font-family: 'Courier New';
+  font-weight: bold;
+  color: #333;
+  font-size: 1.5em;
+}
+
+.blog-post-body {
+  padding-left: 16px;
+  color: #111;
+  text-decoration: none;
+}
+
+.blog-post-image {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 10px 0.1px rgba(50, 50, 50, 0.1);
+  padding: 0;
+}
+@media (max-width: 768px) {
+  .blog-post-image {
+    margin-bottom: 2em;
+  }
+}
+
+.blog-post-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wordwrap {
+  white-space: pre-wrap; /* CSS3 */
+  white-space: -moz-pre-wrap; /* Firefox */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* IE */
+}
+
+link {
+  color: inherit;
+  text-decoration: none; /* no underline */
+}
+
+a:hover,
+a:visited,
+a:link,
+a:active {
+  text-decoration: none;
 }

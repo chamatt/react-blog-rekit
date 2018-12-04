@@ -64,6 +64,7 @@ export class EditPost extends Component {
               placeholder="Corpo"
               value={this.state.body}
               onChange={this.handleChange}
+              rows="10"
             />
             <input
               className="form-control add-post-title"
@@ -77,7 +78,7 @@ export class EditPost extends Component {
               <button type="submit" className="btn btn-primary add-post-button text-center">
                 Editar
               </button>
-              <Link to="/" className="btn btn-danger add-post-button text-center">
+              <Link to={`/details/${this.props.match.params.id}`} className="btn btn-danger add-post-button text-center">
                 Cancelar
               </Link>
             </div>
