@@ -25,7 +25,7 @@ export class PostBlog extends Component {
           </div>
           <div class="col-7">
             <div class="blog-post-title">{title}</div>
-            <div class="blog-post-body">{body}</div>
+            <div class="blog-post-body wordwrap">{body}</div>
           </div>
           <div class="col-2 d-flex align-items-center">
             <Link to={`/edit/${id}`} className="btn btn-info">O</Link>
