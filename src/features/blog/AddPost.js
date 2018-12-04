@@ -36,6 +36,11 @@ export class AddPost extends Component {
     console.log(this.state);
     return (
       <React.Fragment>
+        {this.props.blog.enviarPostError && (
+            <div className="alert alert-danger" role="alert">
+              Não foi possível enviar o post, tente novamente!
+            </div>
+          )}
         <h1 className="text-center mt-4 blog-title-header">Adicionar Post</h1>
         <hr className="blog-title-separator" />
         <div className="add-post-container">

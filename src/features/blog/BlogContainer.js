@@ -28,11 +28,13 @@ export class BlogContainer extends Component {
               Não foi possível obter os posts, tente novamente!
             </div>
           )}
-          {!this.props.blog.obterPostsPending && this.props.blog.posts.length === 0 && (
-            <div className="alert alert-info" role="alert">
-              Nenhum post! Crie um novo!
-            </div>
-          )}
+          {!this.props.blog.obterPostsPending &&
+            !this.props.blog.obterPostsError &&
+            this.props.blog.posts.length === 0 && (
+              <div className="alert alert-info" role="alert">
+                Nenhum post! Crie um novo!
+              </div>
+            )}
           {!this.props.blog.obterPostsError &&
             this.props.blog.posts.length !== 0 &&
             this.props.blog.posts

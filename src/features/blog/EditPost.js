@@ -44,12 +44,17 @@ export class EditPost extends Component {
         <h1 className="text-center mt-4 blog-title-header">Editar Post</h1>
         <hr className="blog-title-separator" />
         <div className="add-post-container">
-          {this.props.blog.editarPostError && (
+          {this.props.blog.obterPostError && (
             <div className="alert alert-danger" role="alert">
-              Não foi possível obter os posts, tente novamente!
+              Não foi carregar o post a ser editado, atualize a página.
             </div>
           )}
-          <form id="add-post-form" onSubmit={this.handleSubmit}>
+          {this.props.blog.editarPostError && (
+            <div className="alert alert-danger" role="alert">
+              Não foi possível editar o post.
+            </div>
+          )}
+          {!this.props.blog.obterPostError && <form id="add-post-form" onSubmit={this.handleSubmit}>
             <input
               className="form-control add-post-title"
               type="text"
@@ -82,7 +87,7 @@ export class EditPost extends Component {
                 Cancelar
               </Link>
             </div>
-          </form>
+          </form>}
         </div>
       </React.Fragment>
     );
