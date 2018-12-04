@@ -7,7 +7,7 @@ import { PostBlog } from './';
 
 export class BlogContainer extends Component {
   static propTypes = {
-    common: PropTypes.object.isRequired,
+    blog: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
   };
 
@@ -16,25 +16,26 @@ export class BlogContainer extends Component {
   }
 
   render() {
-    console.log(this.props.common.posts);
+    console.log(this.props.blog.posts);
     return (
       <React.Fragment>
         <h1 className="text-center mt-4 blog-title-header">Posts</h1>
         <hr className="blog-title-separator" />
         <section className="blog-container" id="blog">
-          {this.props.common.obterPostsPending && <div className="text-center">Carregando...</div>}
-          {this.props.common.obterPostsError && (
+          {this.props.blog.obterPostsPending && <div className="text-center">Carregando...</div>}
+          {this.props.blog.obterPostsError && (
             <div className="alert alert-danger" role="alert">
               Não foi possível obter os posts, tente novamente!
             </div>
           )}
-          {!this.props.common.obterPostsPending && this.props.common.posts.length === 0 && (
+          {!this.props.blog.obterPostsPending && this.props.blog.posts.length === 0 && (
             <div className="alert alert-info" role="alert">
               Nenhum post! Crie um novo!
             </div>
           )}
-          {!this.props.common.obterPostsError && this.props.common.posts.length !== 0 &&
-            this.props.common.posts
+          {!this.props.blog.obterPostsError &&
+            this.props.blog.posts.length !== 0 &&
+            this.props.blog.posts
               .slice()
               .reverse()
               .map(post => <PostBlog key={post.id} postData={post} />)}
@@ -47,7 +48,7 @@ export class BlogContainer extends Component {
 /* istanbul ignore next */
 function mapStateToProps(state) {
   return {
-    common: state.common,
+    blog: state.blog,
   };
 }
 

@@ -6,14 +6,14 @@ import * as actions from './redux/actions';
 
 export class PostDetails extends Component {
   static propTypes = {
-    common: PropTypes.object.isRequired,
+    blog: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
   };
 
   render() {
     return (
-      <div className="common-post-details">
-        Page Content: common/PostDetails
+      <div className="blog-post-details">
+        Page Content: blog/PostDetails
       </div>
     );
   }
@@ -22,7 +22,7 @@ export class PostDetails extends Component {
 /* istanbul ignore next */
 function mapStateToProps(state) {
   return {
-    common: state.common,
+    blog: state.blog,
   };
 }
 

@@ -1,19 +1,19 @@
 import axios from 'axios';
 
 import {
-  COMMON_ENVIAR_POST_BEGIN,
-  COMMON_ENVIAR_POST_SUCCESS,
-  COMMON_ENVIAR_POST_FAILURE,
-  COMMON_ENVIAR_POST_DISMISS_ERROR,
+  BLOG_OBTER_POST_BEGIN,
+  BLOG_OBTER_POST_SUCCESS,
+  BLOG_OBTER_POST_FAILURE,
+  BLOG_OBTER_POST_DISMISS_ERROR,
 } from './constants';
 
 // Rekit uses redux-thunk for async actions by default: https://github.com/gaearon/redux-thunk
 // If you prefer redux-saga, you can use rekit-plugin-redux-saga: https://github.com/supnate/rekit-plugin-redux-saga
-export function enviarPost(post) {
+export function obterPost(id) {
   return dispatch => {
     // optionally you can have getState as the second argument
     dispatch({
-      type: COMMON_ENVIAR_POST_BEGIN,
+      type: BLOG_OBTER_POST_BEGIN,
     });
 
     // Return a promise so that you could control UI flow without states in the store.
@@ -24,19 +24,19 @@ export function enviarPost(post) {
       // doRequest is a placeholder Promise. You should replace it with your own logic.
       // See the real-word example at:  https://github.com/supnate/rekit/blob/master/src/features/home/redux/fetchRedditReactjsList.js
       // args.error here is only for test coverage purpose.
-      const doRequest = axios.post('http://localhost:3000/posts', post);
+      const doRequest = axios.get(`http://localhost:3000/posts/${id}`);
       doRequest.then(
         res => {
           dispatch({
-            type: COMMON_ENVIAR_POST_SUCCESS,
-            data: res,
+            type: BLOG_OBTER_POST_SUCCESS,
+            data: res.data,
           });
           resolve(res);
         },
         // Use rejectHandler as the second argument so that render errors won't be caught.
         err => {
           dispatch({
-            type: COMMON_ENVIAR_POST_FAILURE,
+            type: BLOG_OBTER_POST_FAILURE,
             data: { error: err },
           });
           reject(err);
@@ -50,43 +50,44 @@ export function enviarPost(post) {
 
 // Async action saves request error by default, this method is used to dismiss the error info.
 // If you don't want errors to be saved in Redux store, just ignore this method.
-export function dismissEnviarPostError() {
+export function dismissObterPostError() {
   return {
-    type: COMMON_ENVIAR_POST_DISMISS_ERROR,
+    type: BLOG_OBTER_POST_DISMISS_ERROR,
   };
 }
 
 export function reducer(state, action) {
   switch (action.type) {
-    case COMMON_ENVIAR_POST_BEGIN:
+    case BLOG_OBTER_POST_BEGIN:
       // Just after a request is sent
       return {
         ...state,
-        enviarPostPending: true,
-        enviarPostError: null,
+        obterPostPending: true,
+        obterPostError: null,
       };
 
-    case COMMON_ENVIAR_POST_SUCCESS:
+    case BLOG_OBTER_POST_SUCCESS:
       // The request is success
       return {
         ...state,
-        enviarPostPending: false,
-        enviarPostError: null,
+        obterPostPending: false,
+        obterPostError: null,
+        post: action.data,
       };
 
-    case COMMON_ENVIAR_POST_FAILURE:
+    case BLOG_OBTER_POST_FAILURE:
       // The request is failed
       return {
         ...state,
-        enviarPostPending: false,
-        enviarPostError: action.data.error,
+        obterPostPending: false,
+        obterPostError: action.data.error,
       };
 
-    case COMMON_ENVIAR_POST_DISMISS_ERROR:
+    case BLOG_OBTER_POST_DISMISS_ERROR:
       // Dismiss the request failure error
       return {
         ...state,
-        enviarPostError: null,
+        obterPostError: null,
       };
 
     default:

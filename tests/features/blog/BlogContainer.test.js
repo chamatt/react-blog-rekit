@@ -1,19 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { AddPost } from '../../../src/features/common/AddPost';
+import { BlogContainer } from '../../../src/features/blog/BlogContainer';
 
-describe('common/AddPost', () => {
+describe('blog/BlogContainer', () => {
   it('renders node with correct class name', () => {
     const props = {
       common: {},
       actions: {},
     };
     const renderedComponent = shallow(
-      <AddPost {...props} />
+      <BlogContainer {...props} />
     );
 
     expect(
-      renderedComponent.find('.common-add-post').length
+      renderedComponent.find('.blog-blog-container').length
     ).toBe(1);
   });
 });

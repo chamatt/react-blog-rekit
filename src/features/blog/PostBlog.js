@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 export class PostBlog extends Component {
   static propTypes = {
-    common: PropTypes.object.isRequired,
+    blog: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
   };
 
@@ -40,7 +40,7 @@ export class PostBlog extends Component {
 /* istanbul ignore next */
 function mapStateToProps(state) {
   return {
-    common: state.common,
+    blog: state.blog,
   };
 }
 

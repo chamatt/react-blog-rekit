@@ -1,17 +1,17 @@
 import axios from "axios";
 import {
-  COMMON_DELETAR_POST_BEGIN,
-  COMMON_DELETAR_POST_SUCCESS,
-  COMMON_DELETAR_POST_FAILURE,
-  COMMON_DELETAR_POST_DISMISS_ERROR,
+  BLOG_OBTER_POSTS_BEGIN,
+  BLOG_OBTER_POSTS_SUCCESS,
+  BLOG_OBTER_POSTS_FAILURE,
+  BLOG_OBTER_POSTS_DISMISS_ERROR,
 } from './constants';
 
 // Rekit uses redux-thunk for async actions by default: https://github.com/gaearon/redux-thunk
 // If you prefer redux-saga, you can use rekit-plugin-redux-saga: https://github.com/supnate/rekit-plugin-redux-saga
-export function deletarPost(id) {
+export function obterPosts(args = {}) {
   return (dispatch) => { // optionally you can have getState as the second argument
     dispatch({
-      type: COMMON_DELETAR_POST_BEGIN,
+      type: BLOG_OBTER_POSTS_BEGIN,
     });
 
     // Return a promise so that you could control UI flow without states in the store.
@@ -22,18 +22,19 @@ export function deletarPost(id) {
       // doRequest is a placeholder Promise. You should replace it with your own logic.
       // See the real-word example at:  https://github.com/supnate/rekit/blob/master/src/features/home/redux/fetchRedditReactjsList.js
       // args.error here is only for test coverage purpose.
-      const doRequest = axios.delete(`http://localhost:3000/posts/${id}`);
+      const doRequest = axios.get("http://localhost:3000/posts");
       doRequest.then(
         (res) => {
           dispatch({
-            type: COMMON_DELETAR_POST_SUCCESS
+            type: BLOG_OBTER_POSTS_SUCCESS,
+            data: res.data,
           });
           resolve(res);
         },
         // Use rejectHandler as the second argument so that render errors won't be caught.
         (err) => {
           dispatch({
-            type: COMMON_DELETAR_POST_FAILURE,
+            type: BLOG_OBTER_POSTS_FAILURE,
             data: { error: err },
           });
           reject(err);
@@ -47,43 +48,44 @@ export function deletarPost(id) {
 
 // Async action saves request error by default, this method is used to dismiss the error info.
 // If you don't want errors to be saved in Redux store, just ignore this method.
-export function dismissDeletarPostError() {
+export function dismissObterPostsError() {
   return {
-    type: COMMON_DELETAR_POST_DISMISS_ERROR,
+    type: BLOG_OBTER_POSTS_DISMISS_ERROR,
   };
 }
 
 export function reducer(state, action) {
   switch (action.type) {
-    case COMMON_DELETAR_POST_BEGIN:
+    case BLOG_OBTER_POSTS_BEGIN:
       // Just after a request is sent
       return {
         ...state,
-        deletarPostPending: true,
-        deletarPostError: null,
+        obterPostsPending: true,
+        obterPostsError: null,
       };
 
-    case COMMON_DELETAR_POST_SUCCESS:
+    case BLOG_OBTER_POSTS_SUCCESS:
       // The request is success
       return {
         ...state,
-        deletarPostPending: false,
-        deletarPostError: null,
+        obterPostsPending: false,
+        obterPostsError: null,
+        posts: action.data
       };
 
-    case COMMON_DELETAR_POST_FAILURE:
+    case BLOG_OBTER_POSTS_FAILURE:
       // The request is failed
       return {
         ...state,
-        deletarPostPending: false,
-        deletarPostError: action.data.error,
+        obterPostsPending: false,
+        obterPostsError: action.data.error,
       };
 
-    case COMMON_DELETAR_POST_DISMISS_ERROR:
+    case BLOG_OBTER_POSTS_DISMISS_ERROR:
       // Dismiss the request failure error
       return {
         ...state,
-        deletarPostError: null,
+        obterPostsError: null,
       };
 
     default:

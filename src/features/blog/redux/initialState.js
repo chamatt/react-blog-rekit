@@ -5,9 +5,19 @@
 // a quick view about what data is used for the feature, at any time.
 
 // NOTE: initialState constant is necessary so that Rekit could auto add initial state when creating async actions.
-
 const initialState = {
-  
+  posts: [],
+  post: [],
+  deletarPostPending: false,
+  deletarPostError: null,
+  editarPostPending: false,
+  editarPostError: null,
+  enviarPostPending: false,
+  enviarPostError: null,
+  obterPostPending: false,
+  obterPostError: null,
+  obterPostsPending: false,
+  obterPostsError: null,
 };
 
 export default initialState;

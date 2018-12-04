@@ -1,18 +1,19 @@
-import axios from "axios";
+import axios from 'axios';
 
 import {
-  COMMON_EDITAR_POST_BEGIN,
-  COMMON_EDITAR_POST_SUCCESS,
-  COMMON_EDITAR_POST_FAILURE,
-  COMMON_EDITAR_POST_DISMISS_ERROR,
+  BLOG_ENVIAR_POST_BEGIN,
+  BLOG_ENVIAR_POST_SUCCESS,
+  BLOG_ENVIAR_POST_FAILURE,
+  BLOG_ENVIAR_POST_DISMISS_ERROR,
 } from './constants';
 
 // Rekit uses redux-thunk for async actions by default: https://github.com/gaearon/redux-thunk
 // If you prefer redux-saga, you can use rekit-plugin-redux-saga: https://github.com/supnate/rekit-plugin-redux-saga
-export function editarPost(id, post) {
-  return (dispatch) => { // optionally you can have getState as the second argument
+export function enviarPost(post) {
+  return dispatch => {
+    // optionally you can have getState as the second argument
     dispatch({
-      type: COMMON_EDITAR_POST_BEGIN,
+      type: BLOG_ENVIAR_POST_BEGIN,
     });
 
     // Return a promise so that you could control UI flow without states in the store.
@@ -23,19 +24,19 @@ export function editarPost(id, post) {
       // doRequest is a placeholder Promise. You should replace it with your own logic.
       // See the real-word example at:  https://github.com/supnate/rekit/blob/master/src/features/home/redux/fetchRedditReactjsList.js
       // args.error here is only for test coverage purpose.
-      const doRequest = axios.put(`http://localhost:3000/posts/${id}`, post);
+      const doRequest = axios.post('http://localhost:3000/posts', post);
       doRequest.then(
-        (res) => {
+        res => {
           dispatch({
-            type: COMMON_EDITAR_POST_SUCCESS,
+            type: BLOG_ENVIAR_POST_SUCCESS,
             data: res,
           });
           resolve(res);
         },
         // Use rejectHandler as the second argument so that render errors won't be caught.
-        (err) => {
+        err => {
           dispatch({
-            type: COMMON_EDITAR_POST_FAILURE,
+            type: BLOG_ENVIAR_POST_FAILURE,
             data: { error: err },
           });
           reject(err);
@@ -49,43 +50,43 @@ export function editarPost(id, post) {
 
 // Async action saves request error by default, this method is used to dismiss the error info.
 // If you don't want errors to be saved in Redux store, just ignore this method.
-export function dismissEditarPostError() {
+export function dismissEnviarPostError() {
   return {
-    type: COMMON_EDITAR_POST_DISMISS_ERROR,
+    type: BLOG_ENVIAR_POST_DISMISS_ERROR,
   };
 }
 
 export function reducer(state, action) {
   switch (action.type) {
-    case COMMON_EDITAR_POST_BEGIN:
+    case BLOG_ENVIAR_POST_BEGIN:
       // Just after a request is sent
       return {
         ...state,
-        editarPostPending: true,
-        editarPostError: null,
+        enviarPostPending: true,
+        enviarPostError: null,
       };
 
-    case COMMON_EDITAR_POST_SUCCESS:
+    case BLOG_ENVIAR_POST_SUCCESS:
       // The request is success
       return {
         ...state,
-        editarPostPending: false,
-        editarPostError: null,
+        enviarPostPending: false,
+        enviarPostError: null,
       };
 
-    case COMMON_EDITAR_POST_FAILURE:
+    case BLOG_ENVIAR_POST_FAILURE:
       // The request is failed
       return {
         ...state,
-        editarPostPending: false,
-        editarPostError: action.data.error,
+        enviarPostPending: false,
+        enviarPostError: action.data.error,
       };
 
-    case COMMON_EDITAR_POST_DISMISS_ERROR:
+    case BLOG_ENVIAR_POST_DISMISS_ERROR:
       // Dismiss the request failure error
       return {
         ...state,
-        editarPostError: null,
+        enviarPostError: null,
       };
 
     default:
