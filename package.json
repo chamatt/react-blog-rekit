@@ -34,6 +34,7 @@
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
+    "json-server": "^0.14.0",
     "lodash": "^4.17.5",
     "nock": "^9.2.3",
     "node-sass-chokidar": "^1.2.1",
@@ -66,9 +67,10 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "node index.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "rekit": "node scripts/start.js"
   },
   "rekit": {
     "devPort": 6075,
@@ -113,5 +115,6 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "description": "react-blog-rekit created by Rekit."
+  "description": "react-blog-rekit created by Rekit.",
+  "proxy": "http://localhost:3000/api"
 }
