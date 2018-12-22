@@ -20,7 +20,7 @@ O repositório já possui um Procfile, e está todo configura tanto pra ser roda
 Esse projeto foi feito com ajuda da IDE para React chamada **[Rekit](https://github.com/supnate/rekit)**, que eu estou testando atualmente e achei muito boa.
 Além disso o projeto também usa **Redux** para gerenciamento e compartilhamento de estado.
 
-Você pode ver o resultado final no Heroku: (http://react-blog-rekit.herokuapp.com/) ou você pode ver nos gifs abaixo:
+Você pode ver o resultado final no meu site (https://react-blog.matheusvicente.ga/), no Heroku: (http://react-blog-rekit.herokuapp.com/) ou você pode ver nos gifs abaixo:
 
 ### Visualizando post
 ![Visualizando](https://thumbs.gfycat.com/FaithfulAliveAnemonecrab-size_restricted.gif)
