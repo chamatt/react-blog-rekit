@@ -15,12 +15,12 @@ npm install
 npm build
 npm start
 ```
-O repositório já possui um Procfile, e está todo configura tanto pra ser rodado localmente, quanto pra ser enviado pro Heroku (ou Dokku).
+O repositório já possui um Procfile, e está todo configura tanto pra ser rodado localmente (localhost:3000), quanto pra ser enviado pro Heroku (ou Dokku).
 
 Esse projeto foi feito com ajuda da IDE para React chamada **[Rekit](https://github.com/supnate/rekit)**, que eu estou testando atualmente e achei muito boa.
 Além disso o projeto também usa **Redux** para gerenciamento e compartilhamento de estado.
 
-O resultado final você pode ver nos gifs abaixo:
+Você pode ver o resultado final hospeado em meu site: (https://react-blog.matheusvicente.ga/) ou você pode ver nos gifs abaixo:
 
 ### Visualizando post
 ![Visualizando](https://thumbs.gfycat.com/FaithfulAliveAnemonecrab-size_restricted.gif)
