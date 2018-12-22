@@ -16,6 +16,7 @@
     "bootstrap": "^4.1.3",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
     "chalk": "1.1.3",
+    "concurrently": "^4.1.0",
     "css-loader": "0.28.7",
     "dotenv": "4.0.0",
     "dotenv-expand": "4.2.0",
@@ -69,8 +70,10 @@
   "scripts": {
     "start": "node index.js",
     "build": "node scripts/build.js",
+    "build-start": "npm run build && npm start",
     "test": "node scripts/test.js --env=jsdom",
-    "rekit": "node scripts/start.js"
+    "rekit": "node scripts/start.js",
+    "dev": "concurrently \"npm run rekit\" \"json-server db.json --routes routes.json\" "
   },
   "rekit": {
     "devPort": 6075,
